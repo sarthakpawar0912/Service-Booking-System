@@ -21,19 +21,15 @@ public class ClientController {
 	@Autowired(required=true)
 	private ClientService clientService;
 
-
 	@GetMapping("/ads")
 	public ResponseEntity<?> getAllAds(){
 		return ResponseEntity.ok(clientService.getAllAds());
 	}
 
-
-
 	@GetMapping("/search/{name}")
 	public ResponseEntity<?> searchAdByservice(@PathVariable String name){
 		return ResponseEntity.ok(clientService.searchAdByName(name));
 	}
-
 
 	@PostMapping("/book-service")
 	public ResponseEntity<?> bookService(@RequestBody ReservationDTO reservationDTO){
@@ -47,22 +43,15 @@ public class ClientController {
 		}
 	}
 
-
-
-
 	@GetMapping("/ad/{adId}")
 	public ResponseEntity<?> getAdDetailsByAdId(@PathVariable Long AdId){
 		return ResponseEntity.ok(clientService.getAdDetailsByAdId(AdId));
 	}
 
-
-
 	@GetMapping("/my-bookings/{userId}")
 	public ResponseEntity<?> getAllBookingsByUserId(@PathVariable Long userId){
 		return ResponseEntity.ok(clientService.getAllBookingsByUserId(userId));
 	}
-
-
 
 	@PostMapping("/review")
 	public ResponseEntity<?> giveReview(@RequestBody ReviewDTO reviewDTO){
@@ -73,20 +62,4 @@ public class ClientController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
