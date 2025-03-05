@@ -42,8 +42,6 @@ public class Reservation {
 
 	public ReservationDTO getReservationDTO() {
 		ReservationDTO dto= new ReservationDTO();
-
-
 		dto.setId(id);
 		dto.setServicename(ad.getServiceName());
 		dto.setBookDate(bookDate);
