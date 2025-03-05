@@ -75,7 +75,6 @@ public class AuthenticationController {
         responseBody.put("userId", userDetails.getUsername());
         responseBody.put("role", userDetails.getAuthorities());
         responseBody.put("token", jwt);
-
         return ResponseEntity.ok(responseBody);
     }
 }
