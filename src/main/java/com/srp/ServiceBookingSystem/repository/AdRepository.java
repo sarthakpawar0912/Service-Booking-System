@@ -10,11 +10,7 @@ import com.srp.ServiceBookingSystem.entity.Ad;
 @Repository
 public interface AdRepository extends JpaRepository<Ad, Long>{
 
-	
 	List<Ad>findAllByUserId(Long userId);
-	
-	
+
 	List<Ad> findAllByServiceName(String name);
-	
-	
 }
