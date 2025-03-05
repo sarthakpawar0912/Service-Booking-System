@@ -38,6 +38,7 @@ public static final String SECRET = "aVeryStrongBase64EncodedSecretKeyForJwtSign
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userName);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser() // Use parserBuilder for modern io.jsonwebtoken library
                 .setSigningKey(getSignKey())
@@ -45,28 +46,28 @@ public static final String SECRET = "aVeryStrongBase64EncodedSecretKeyForJwtSign
                 .parseClaimsJws(token)
                 .getBody();
     }
+
     public <T> T extractClaims(String token,Function<Claims, T> claimsResolver){
     	final Claims claims=extractAllClaims(token);
     	return claimsResolver.apply(claims);
     }
-    
+
+
     public Date extractExpiration(String token) {
     	return extractClaims(token, Claims::getExpiration);
     }
-    
+
     public String extractUsername(String token) {
     	return extractClaims(token, Claims::getSubject);
     }
-    
+
     public Boolean isTokenExpired(String token) {
     	return extractExpiration(token).before(new Date());
     }
+
     public Boolean validateToken(String token,UserDetails userDetails) {
     	final String username=extractUsername(token);
     	return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-    
-    
-    
-    
+
 }
