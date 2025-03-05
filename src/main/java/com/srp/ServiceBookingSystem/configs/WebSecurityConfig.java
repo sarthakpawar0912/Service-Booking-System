@@ -20,10 +20,8 @@ import com.srp.ServiceBookingSystem.services.jwt.JwtRequestFilter;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
-
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
