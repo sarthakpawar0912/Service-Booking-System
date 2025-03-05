@@ -18,9 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimpleCorsFilter implements Filter {
-
 	private String clientAppUrl = "";
-
 	public SimpleCorsFilter() {
 	}
 
