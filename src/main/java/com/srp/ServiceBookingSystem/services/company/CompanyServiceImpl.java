@@ -22,14 +22,11 @@ import com.srp.ServiceBookingSystem.repository.UserRepository;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-
 	@Autowired
 	private UserRepository userRepository;
 
-
 	@Autowired
 	private AdRepository adRepository;
-
 
 	@Autowired
 	public ReservationRepository reservationRepository;
@@ -43,8 +40,6 @@ public class CompanyServiceImpl implements CompanyService {
 			ad.setImg(adDTO.getImg().getBytes());
 			ad.setPrice(adDTO.getPrice());
 			ad.setUser(optionalUser.get());
-
-
 		adRepository.save(ad);
 		return true;
 		}
@@ -55,7 +50,6 @@ public class CompanyServiceImpl implements CompanyService {
 		return adRepository.findAllByUserId(userId).stream().map(Ad::getAdDto).collect(Collectors.toList());
 	}
 
-
 	public AdDTO getAdById(Long adId) {
 		Optional<Ad> optionalAd=adRepository.findById(adId);
 		if(optionalAd.isPresent()) {
@@ -64,17 +58,13 @@ public class CompanyServiceImpl implements CompanyService {
 		return null;
 	}
 
-
 	public boolean updateAd(Long adId,AdDTO adDTO) throws IOException {
 		Optional<Ad> optionalAd=adRepository.findById(adId);
 		if(optionalAd.isPresent()) {
 			Ad ad= optionalAd.get();
-
-
 			ad.setServiceName(adDTO.getServiceName());
 			ad.setDescription(adDTO.getDescription());
 			ad.setPrice(adDTO.getPrice());
-
 			if(adDTO.getImg() != null) {
 				ad.setImg(adDTO.getImg().getBytes());
 			}
@@ -83,7 +73,6 @@ public class CompanyServiceImpl implements CompanyService {
 			}
 			else{
 				return false;
-
 		}
 	}
 
@@ -98,7 +87,6 @@ public class CompanyServiceImpl implements CompanyService {
 		return false;
 	}
 
-
 	public List<ReservationDTO> geeAllAdBookings(Long companyId){
 		return reservationRepository.findAllByCompanyId(companyId)
 				.stream().map(Reservation::getReservationDTO)
@@ -106,14 +94,13 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 
 	public boolean changeBookingStatus(Long bookingId,String status) {
-		Optional<Reservation> optionalReservation=reservationRepository.findById(bookingId);
-
-		if(optionalReservation.isPresent()) {
-			Reservation existingReservation=optionalReservation.get();
-			if(Objects.equals(status, "Approve")) {
+		Optional<Reservation> optionalReservation = reservationRepository.findById(bookingId);
+		if (optionalReservation.isPresent()) {
+			Reservation existingReservation = optionalReservation.get();
+			if (Objects.equals(status, "Approve")) {
 				existingReservation.setReservationStatus(ReservationStatus.APPROVED);
 
-			}else {
+			} else {
 				existingReservation.setReservationStatus(ReservationStatus.REJECTED);
 			}
 			reservationRepository.save(existingReservation);
@@ -121,33 +108,4 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return false;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
