@@ -23,10 +23,8 @@ import com.srp.ServiceBookingSystem.services.company.CompanyService;
 @RequestMapping("/api/company")
 public class CompanyController {
 
-
 	@Autowired
 	private CompanyService companyService;
-
 
 	@PostMapping("/ad/{userId}")
 	public ResponseEntity<?> postAd(@PathVariable Long userId,@ModelAttribute AdDTO adDTO) throws IOException{
@@ -44,8 +42,6 @@ public class CompanyController {
 		return ResponseEntity.ok(companyService.getAllAds(userId));
 	}
 
-
-
 	@GetMapping("/ad/{adId}")
 	public ResponseEntity<?> getAdById(@PathVariable Long adId){
 		AdDTO adDTO =companyService.getAdById(adId);
@@ -57,14 +53,9 @@ public class CompanyController {
 		}
 	}
 
-
-
-
 	@PutMapping("/ad/{adId}")
 	public ResponseEntity<?>updateAd(@PathVariable Long adId, @ModelAttribute AdDTO adDTO) throws IOException{
-
 		boolean SUCCESS=companyService.updateAd(adId, adDTO);
-
 		if(SUCCESS) {
 			return ResponseEntity.status(HttpStatus.OK).build();
 		}
@@ -72,16 +63,11 @@ public class CompanyController {
 			ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			}
 		return null;
-
 	}
-
-
-
 
 	@DeleteMapping("/ad/{adIds}")
 	public ResponseEntity<?> deleteAd(@PathVariable Long adId){
 		boolean SUCCESS=companyService.deleteAd(adId);
-
 		if(SUCCESS) {
 			return ResponseEntity.status(HttpStatus.OK).build();
 		}else {
@@ -89,17 +75,10 @@ public class CompanyController {
 		}
 	}
 
-
-
-
-
 	@GetMapping("/bookings/{companyId}")
 	public ResponseEntity<List<ReservationDTO>> getAllAdBookings(@PathVariable Long companyId){
 		return ResponseEntity.ok(companyService.geeAllAdBookings(companyId));
 	}
-
-
-
 
 	@GetMapping("/bookings/{bookingsId}/{status}")
 	public ResponseEntity<?> changeBookingStatus(@PathVariable Long bookingId, @PathVariable String status){
@@ -107,35 +86,4 @@ public class CompanyController {
 		if(SUCCESS) return ResponseEntity.ok().build();
 		return ResponseEntity.notFound().build();
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
