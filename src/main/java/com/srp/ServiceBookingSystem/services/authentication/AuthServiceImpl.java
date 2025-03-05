@@ -29,10 +29,8 @@ public class AuthServiceImpl implements AuthService {
 		user.setPhone(signupRequestDTO.getPhone());
 		user.setPassword(passwordEncoder.encode(signupRequestDTO.getPassword()));
 		user.setRole(UserRole.CLIENT); // Ensure role is set correctly
-
 		// Debugging: Print the role value
 		System.out.println("Role being set for client: " + user.getRole());
-
 		return userRepository.save(user).getDto();
 	}
 
@@ -44,10 +42,7 @@ public class AuthServiceImpl implements AuthService {
 		user.setPhone(signupRequestDTO.getPhone());
 		user.setPassword(passwordEncoder.encode(signupRequestDTO.getPassword()));
 		user.setRole(UserRole.COMPANY);
-
-
 		System.out.println("Role being set for company: " + user.getRole());
-
 		return userRepository.save(user).getDto();
 	}
 
