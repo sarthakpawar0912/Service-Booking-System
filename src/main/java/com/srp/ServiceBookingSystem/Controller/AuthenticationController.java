@@ -44,6 +44,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
 
+
     @PostMapping("/company/sign-up")
     public ResponseEntity<?> signupCompany(@RequestBody SignupRequestDTO signupRequestDTO) {
         if (authService.presentByEmail(signupRequestDTO.getEmail())) {
@@ -52,6 +53,7 @@ public class AuthenticationController {
         UserDto createdUser = authService.signupCompany(signupRequestDTO);
         return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
@@ -69,7 +71,6 @@ public class AuthenticationController {
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("userId", userDetails.getUsername());
         responseBody.put("role", userDetails.getAuthorities());
