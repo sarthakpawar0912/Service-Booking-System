@@ -71,14 +71,9 @@ public class ClientServiceImpl implements ClientService {
 		return false;
 	}
 
-
-
-
 	public AdDetailsForClientDTO getAdDetailsByAdId(Long adId) {
-
 		Optional<Ad> optionalAd=adRepository.findById(adId);
 		AdDetailsForClientDTO adDetailsForClientDTO=new AdDetailsForClientDTO();
-
 		if(optionalAd.isPresent()) {
 			adDetailsForClientDTO.setAdDTO(optionalAd.get().getAdDto());
 
@@ -97,9 +92,6 @@ public class ClientServiceImpl implements ClientService {
 				.collect(Collectors.toList());
 
 	}
-
-
-
 
 	public Boolean giveReview(ReviewDTO reviewDTO) {
 		Optional<User> optionalUser=userRepository.findById(reviewDTO.getUserId());
@@ -124,23 +116,6 @@ public class ClientServiceImpl implements ClientService {
 			reservationRepository.save(booking);
 			return true;
 		}
-		return false;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		return false;}
 
 }
